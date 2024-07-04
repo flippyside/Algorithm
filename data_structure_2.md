@@ -40,7 +40,7 @@ Q ab
 
 
 ```cpp
-const int N = 300005;
+const int N = 100005;
 
 int son[N][26], cnt[N], idx = 0;
 // son[p][u]：存储字母 u 在节点 p 下的子节点编号

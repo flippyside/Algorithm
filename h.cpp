@@ -4,18 +4,32 @@
 #include <algorithm>
 #include <memory.h>
 using namespace std;
+typedef pair<int,int> pii;
 
 const int N = 100010;
-int q[N], hh = 0, tt = -1;
+
+int h[N], e[N], ne[N], idx;
+// h[i]: 第i个单链表
+bool st[N]; // 存储点的遍历情况
+int ans;
+
+void add(int a,int b){
+    e[idx] = b;
+    ne[idx] = h[a];
+    h[a] = idx++;
+}
+
+// 以u为根的子树中 点的数量
+void dfs(int u){
+    st[u] = true; // 已经被遍历
+    for(int i = h[u]; i != -1; i = ne[i]){
+        int j = e[i];
+        if(!st[j]) dfs(j);
+    }
+}
 
 int main(){
-    int m;
-    cin >> m;
-    while(m--){
-        string op;
-        if(op == "push") { int x; cin >> x; q[++tt] = x;}
-        else if(op == "pop") {}
-    }
+    memset(h, -1, sizeof(h)); // 初始化头节点
 }
 
 
@@ -68,6 +82,6 @@ int main(){
 *
 \0
 2
-+
++ 
 2
 */
