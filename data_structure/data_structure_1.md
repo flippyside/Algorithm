@@ -15,7 +15,6 @@ idx       0  1  2  3  -1
 e[0]=3 e[1]=5 e[2]=7 e[3]=9
 ne[0]=1 ne[1]=2 ne[2]=3 ne[3]=-1
 ```
- 
 
 ```cpp
 const int N = 100010;
@@ -77,7 +76,6 @@ int main()
 }
 ```
 
-
 ## 双链表
 
 0：head
@@ -108,6 +106,68 @@ void remove(int k){
     l[r[k]] = l[k];
 }
 ```
+
+
+```cpp
+#include <memory.h>
+using namespace std;
+typedef pair<int,int> pii;
+
+int n, m, q;
+const int N = 100010;
+int e[N], r[N], l[N], idx, head, tail;
+
+void init(){
+    idx = 2; head = 0; tail = 1;
+    r[0] = 1;
+    l[1] = 0;
+}
+
+void remove(int k){
+    r[l[k]] = r[k];
+    l[r[k]] = l[k];
+}
+void insert(int k, int x){
+    e[idx] = x;
+    r[idx] = r[k];
+    l[idx] = k;
+    l[r[k]] = idx;
+    r[k] = idx;
+    idx++;
+}
+
+int main(){
+    cin >> m;
+    init();
+    while (m--)
+    {
+        int x, k;
+        char op[2];
+        cin >> op;
+        if(op[0] == 'L') { cin >> x; insert(0, x); } // 在链表的最左端插入数 x
+        else if(op[0] == 'R') { // 在链表的最右端插入数 x
+            cin >> x;
+            insert(l[1], x); // 插到 尾结点的左节点 的后面
+        }
+        else if(op[0] == 'D'){ // 将第 k 个插入的数删除
+            cin >> k;
+            remove(k + 1); // 链表从2开始。k - 1 + 2 = k + 1
+        }
+        else if(op[0] == 'I'){
+            if(op[1] == 'L') { // 在第 k 个插入的数左侧插入一个数
+                cin >> k >> x;
+                insert(l[k + 1], x);
+            }
+            else{ // 在第 k 个插入的数右侧插入一个数
+                cin >>k>>x;
+                insert(k + 1, x);
+            }
+        }
+    }
+    for(int i = r[0]; i != 1; i = r[i]) cout << e[i] << " ";
+}
+```
+
 
 ## 邻接表
 
@@ -142,6 +202,17 @@ else empty
 // 栈顶
 stk[tt];
 ```
+
+
+表达式求值：
+
+`((a * (b + c)) - d)`
+- 中缀->前缀：`- ( * (a + (b  c))  d)`->`-*a+bcd`
+- 中缀->后缀：`((a  (b  c) + ) * d)-`->`abc+*d-`
+
+`((a+b)+(a+b)+(a+b))`
+
+
 
 ## 队列
 

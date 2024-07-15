@@ -1,87 +1,125 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
-#include <algorithm>
-#include <memory.h>
+#include <string>
 using namespace std;
-typedef pair<int,int> pii;
+typedef pair<int, int> pii;
+typedef long long ll;
 
-const int N = 100010;
+const int N = 12;
 
-int h[N], e[N], ne[N], idx;
-// h[i]: 第i个单链表
-bool st[N]; // 存储点的遍历情况
-int ans;
-
-void add(int a,int b){
-    e[idx] = b;
-    ne[idx] = h[a];
-    h[a] = idx++;
+int power10(int x){ // 10 的 x 次方
+    int res = 1;
+    while(x--) res *= 10;
+    return res;
 }
 
-// 以u为根的子树中 点的数量
-void dfs(int u){
-    st[u] = true; // 已经被遍历
-    for(int i = h[u]; i != -1; i = ne[i]){
-        int j = e[i];
-        if(!st[j]) dfs(j);
+int get(int arr[], int l, int r){ // arr从l到r代表的数字
+    int res = 0;
+    for(int i = l; i >= r; i--)
+        res = res * 10 + arr[i];
+    return res;
+}
+
+// 计算1 ~ n中数字的每一位共出现x的次数
+int count(int n, int x){
+    // 1 <= xxxiyyy <= n
+    int res = 0;
+    if(!n) return 0;
+    // 数组存储数字
+    int arr[N] = {}, cnt = 0;
+    while(n){
+        arr[cnt++] = n % 10;
+        n /= 10;
+    }
+    n = cnt;
+    for(int i = n - 1; i >= 0; i--){
+        // xxx < abc, 此时xxx1yyy一定小于abcdefg，故 yyy = 000 ~ 999。总数为`abc*1000`
+        if(i < n - 1){
+            res += get(arr, n - 1, i + 1) * power10(i);
+            if(x == 0) res -= power10(i);
+        }
+        // xxx = abc
+        // 1 = d
+        if(x == arr[i]){
+            res += get(arr, i - 1, 0); // egf
+        }
+        // 1 < d
+        else if(x < arr[i]) res += power10(i);
     }
 }
 
+
+
 int main(){
-    memset(h, -1, sizeof(h)); // 初始化头节点
+    int a, b;
+    while(cin >> a >> b, a || b){
+        if(a > b) swap(a, b);
+        for(int i = 0; i < 10; i++) cout << count(b, i) - count(a - 1, i) << ' ';
+        cout << endl;
+    }
 }
 
-
-
-
-
-// char e[N];
-// char stk[N];
-// int tt;
-// // tt: 栈顶元素下标
-
-// int main()
-// {
-//     for(int i = 0; e[i] != '\0'; i++){
-//         if(e[i] == '(') continue;
-//         else if(e[i] == ')') stk[++tt] = e[i] = '\0';
-//         else stk[++tt] = e[i];
+// int _sizeof(int x){
+//     int res = 0;
+//     while(x){
+//         x /= 10;
+//         res++;
 //     }
-//     while(tt > 0){
-//         while(stk[tt] != '\0') {
-//             char s[3]; int res;
-//             s[0] = stk[tt--];
-//             s[1] = stk[tt--];
-//             s[2] = stk[tt--];
-//             switch (s[1])
-//             {
-//             case '+':
-//                 res = int(s[0]) + int(s[2]);
-//                 break;
-//             case '-':
-//                 res = int(s[0]) - int(s[2]);
-//                 break;
-//             case '*':
-//                 res = int(s[0]) * int(s[2]);
-//                 break;
-//             }
-//             stk[++tt] = char(res);
-//         }
-//         stk[tt - 1] = stk[tt];
-//     }
-//     cout << 5 / -3;
+//     return res;
 // }
-/*
-(2+2)*(1+1)
 
-\0
-1
-+
-1
-*
-\0
-2
-+ 
-2
-*/
+// bool cmp(string a, string b){ // 1: a >= b
+//     if(a.size() != b.size()) return a.size() > b.size();
+//     else{
+//         for(int i = 0; i < a.size(); i++){
+//             if(a[i] != b[i]) return a[i] > b[i];
+//         }
+//         return true;
+//     }
+// }
+
+// void f(string a, string b){ // 补齐
+//     if(cmp(a, b)){
+//         int len = a.size() - b.size();
+//         while(len--){
+//             b = "0" + b;
+//         }
+//     }else{
+//         int len = b.size() - a.size();
+//         while(len--){
+//             a = "0" + a;
+//         }        
+//     }
+// }
+
+// void dp(string a, string b){
+//     for(int i = 0; i < 10; i++){
+//         // 统计数字 i 在每一位上出现的次数
+//         if(a > b) swap(a,b);
+//         int sz = _sizeof(b);
+//         f(a, b);
+//         // a <= xxjyy <= b
+//         for(int j = 0; j < sz; j++){
+//             string pre_a;
+//             while(j){
+//                 pre_a += a[p];
+//             }
+//         }
+//     }
+// }
+
+// int main(){
+//     string a, b;
+//     cin>>a>>b;
+//     while(a != "0" && b != "0"){
+        
+//     }
+        
+    
+// }
+
+
+
+
+
+
+
