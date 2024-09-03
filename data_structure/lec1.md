@@ -13,43 +13,57 @@
 
 
 ```c
-int head, idx, e[N], ne[N];
+int idx, e[N], l[N], r[N];
 
-void init(){
-    head=-1,idx=0;
+void i(){r[0]=1;l[1]=0;idx=2;}
+
+void ath(){
+    r[idx]=r[head];
+    r[head]=idx;l[r[head]]=idx;
+    l[idx]=head;
 }
 
-void add(int x){
-    e[idx] = x;
-    ne[idx] = head;
-    head = idx;
-    idx++;
+void insert(int k, int x){
+    e[idx]=x;
+    r[idx]=r[k];
+    l[r[k]]=idx;
+    r[k]=idx;
+    l[idx]=k;
 }
-void p(){
-    for(int i=head;i!=-1;i=ne[i];)cout<<e[i];
+
+void remove(int k){//删除k
+    r[l[k]]=r[k];
+    l[r[k]]=l[k];
 }
-void insert(int i, int x){
-    e[idx] = x;
-    ne[idx] = ne[i];
-    ne[i] = idx++;
-    // 全部移动
-    int tmp;
-    for(int j=i;j!=-1;j=tmp){
-        j = ne[j];
+
+// 输入一个表达式，求其前缀、后缀形式
+
+void pre(char s[]){
+    for(int i=0;s[i]!='\0';i++){
+        if(s[i]!='('&&s[i]!=')'&&s[i]!='+'){
+            if(s[i+2]=='(') continue;
+
+        }
     }
-
 }
 
-int q[N], st[N], n, m, cnt = 0;
-
-void f(int i){
-    int tmp=m--;
-    while(tmp){
-        if(st[i]) tmp--;
-        i = (i+1)%n;
+int hh=0,tt=-1,q[N];
+q[++tt]=x; // insert
+q[hh++];// pop
+while(hh<=tt)
+void f(int arr[]){
+    for(int i=0;i<N;i++){
+        while(hh <= tt && q[hh]>=arr[i]) hh++; // pop the front
+        if(hh<=tt) cout<<q[hh];
+        else cout<<"-1";
+        q[++tt]=arr[i];
     }
-    st[i]=false;
 }
 
-
+void w(){
+    for(int i=0;i<N;i++){
+        q[++tt]=arr[i];
+        
+    }
+}
 ```
