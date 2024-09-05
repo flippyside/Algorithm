@@ -19,6 +19,7 @@
 算法的五个特性：
 
 
+<<<<<<< HEAD
 空间
 复杂度 (space complexity)是指当问题的规模以某种单位从 1 增加到 n 时，解决这个问题的
 算法在执行时所占用的存储空间也以某种单位由 1 增加到 S(n),则称此算法的空间复杂度为 S(n); 时间复杂度 (time complexity)是指当问题的规模以某种单位从 1 增加到 n 时，解
@@ -61,10 +62,22 @@ float sum(float a[], const int n){
         s += a[i]; count++;
     count+=2;
     return s;count++;
+=======
+```c
+int idx, e[N], l[N], r[N];
+
+void i(){r[0]=1;l[1]=0;idx=2;}
+
+void ath(){
+    r[idx]=r[head];
+    r[head]=idx;l[r[head]]=idx;
+    l[idx]=head;
+>>>>>>> 1c5c2e34157d55500b57430046c9f57e98d96ec4
 }
 // 程序步=3n+4
 ```
 
+<<<<<<< HEAD
 ```cpp
 x = sum(R, n);
 // 程序步= 1 +（3n+4）
@@ -76,14 +89,59 @@ for(int i = 0;i<n;i++){ // n+1
         c[i][j]=0; // n^2
         for(int k=0;k<n;k++) // n^2 (n+1)
             c[i][j]=c[i][j]+a[i][k]*b[k][j]; // n^3
+=======
+void insert(int k, int x){
+    e[idx]=x;
+    r[idx]=r[k];
+    l[r[k]]=idx;
+    r[k]=idx;
+    l[idx]=k;
+}
+
+void remove(int k){//删除k
+    r[l[k]]=r[k];
+    l[r[k]]=l[k];
+}
+
+// 输入一个表达式，求其前缀、后缀形式
+
+void pre(char s[]){
+    for(int i=0;s[i]!='\0';i++){
+        if(s[i]!='('&&s[i]!=')'&&s[i]!='+'){
+            if(s[i+2]=='(') continue;
+
+        }
+>>>>>>> 1c5c2e34157d55500b57430046c9f57e98d96ec4
     }
 }
 // T(n)=2n^3+3n^2+2n+1
 ```
 
+<<<<<<< HEAD
 
 渐进的时间复杂度O(n)：当且仅当存在正整数c和n0，使得`T(n)<=c*f(n)`对所有的`n>=n0`成立，则称该算法的时间增长率在O(f(n))中，记为`T(n) = O(f(n))`
 
+=======
+int hh=0,tt=-1,q[N];
+q[++tt]=x; // insert
+q[hh++];// pop
+while(hh<=tt)
+void f(int arr[]){
+    for(int i=0;i<N;i++){
+        while(hh <= tt && q[hh]>=arr[i]) hh++; // pop the front
+        if(hh<=tt) cout<<q[hh];
+        else cout<<"-1";
+        q[++tt]=arr[i];
+    }
+}
+
+void w(){
+    for(int i=0;i<N;i++){
+        q[++tt]=arr[i];
+        
+    }
+}
+>>>>>>> 1c5c2e34157d55500b57430046c9f57e98d96ec4
 ```
 T(n) = n^3 + 2n^2 + 1
 令n>=n0>=1
