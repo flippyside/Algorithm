@@ -18,8 +18,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/petunia/code/Algorithm",
-      "program": "/Users/petunia/code/Algorithm/build/Debug/outDebug"
+      "cwd": "/Users/petunia/code/Algorithm/mycodes",
+      "program": "/Users/petunia/code/Algorithm/mycodes/build/Debug/outDebug"
     }
   ]
 }

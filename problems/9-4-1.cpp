@@ -36,24 +36,8 @@ C++和Java中的整除默认是向零取整；Python中的整除//默认向下�
 
 
 #include<iostream>
+#include<cstring>
 using namespace std;
 const int N=1e5;
-int s[N], tt =-1;
-void pre(char s[]){
-    for(int i=0;s[i]!='\0';i++){
-        if(s[i]!='('&&s[i]!=')'&&s[i]!='+'){
-            if(s[i+2]=='(') continue;
-
-        }
-    }
-}
-const int N = 1e5;
-int q[N], hh = 0, tt = -1, a[N], n;
-
-int main(){
-    for(int i = 0; i<n;i++){
-
-    }
 
 
-}
