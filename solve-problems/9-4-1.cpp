@@ -40,4 +40,13 @@ C++和Java中的整除默认是向零取整；Python中的整除//默认向下�
 using namespace std;
 const int N=1e5;
 
-
+char stk[N], tt = -1;
+string f(char s[]){
+    // 3*(5-2)+7 -- +*3.-5.2.7@
+    int len = sizeof(s);
+    for(int i = len-1;i>=0;i--){
+        if(s[i]>='0'&&s[i]<='9')
+            stk[++tt]=s[i];
+        
+    }
+}
