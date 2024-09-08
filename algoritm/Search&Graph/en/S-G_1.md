@@ -1,27 +1,27 @@
 index
 - DFS
 - BFS
-- 树和图的遍历 
-  - 有向图
-  - 树：无环有向图 
-  - 深度优先遍历在树中的应用 
-  - 宽度优先遍历在图中的应用
-- 拓扑排序
+- Tree and Graph Traversal
+  - Directed Graph
+  - Tree: Directed Acyclic Graph(DAG)
+  - Application of Depth-first Search in Trees 
+  - Application of Breadth-First search in Graphs
+  - Topological Sorting
 
-# DFS
 
-深度优先。搜索到最底部时才回溯，并确保每条路都搜过
+# DFS(Depth-first search)
 
-数据结构：stack
+it backtracks only after reaching the deepest level and ensures every path is explored.
 
-空间：O(h) h：层数
+Data Structure: Stack
+Space Complexity: O(h). h: depth of the recursion
 
-回溯、剪枝
+Tech: Backtracking, Pruning
 
-## 全排列
+## Permutations
 
 ```
-给定一个整数 n，将数字 1∼n 排成一排，按照字典序将所有的排列方法输出。
+Given an integer n, arrange the numbers from 1 to n in all possible ways in lexicographical order.
 ```
 
 ```cpp
@@ -51,9 +51,9 @@ int main(){
 }
 ```
 
-## 八皇后
+## N-Queens
 
-法1: 利用“每行只能有一个皇后”这一推断
+method 1: only 1 queen per row.
 
 ```cpp
 #include <algorithm>
@@ -92,7 +92,7 @@ int main(){
 }
 ```
 
-法2:
+method 2:
 
 ```cpp
 int n;
@@ -120,22 +120,22 @@ void dfs(int x, int y, int s){ // x：行 y：列 s：已经放了几个皇后
 }
 ```
 
-# BFS
+# BFS(breadth-first search)
 
-广度优先。一层一层地搜
+search layer by layer.
 
-数据结构：queue
-空间：O(2^h)
-特点：最短路
+DS：queue
+SC：O(2^h)
+feature：the shortest path problem
 
-1. 把起始点放入 queue
-2. 重复下述2步骤，直到 queue 为空为止：
-- 取出队头；
-- 找出与此点 邻接的 且 尚未遍历 的点，进行标记，然后全部放入queue中。
+1. initialize a queue: put the starting point into the queue.
+2. while the queue is not empty:
+    - take out the head of the queue
+    - expapnd the head: find and mark all the adjacent, unvisited points, and push them into the queue.
 
 
 ```
-给定一个 n×m 的二维整数数组，用来表示一个迷宫，数组中只包含 0 或 1，其中 0 表示可以走的路，1 表示不可通过的墙壁。最初，有一个人位于左上角 (1,1) 处，已知该人每次可以向上、下、左、右任意一个方向移动一个位置。请问，该人从左上角移动至右下角 (n,m) 处，至少需要移动多少次。
+Given an n × m 2D integer array representing a maze, where 0 represents a passable path and 1 represents an impassable wall. Initially, a person is located at the top-left corner (1,1). The person can move one position in any of the four directions: up, down, left, or right. Determine the minimum number of moves required to move from the top-left corner to the bottom-right corner (n,m).
 ```
 
 ```cpp
@@ -175,84 +175,84 @@ int bfs(){
 }
 ```
 
-# 树和图的遍历
+# Tree and Graph Traversal
 
-## 有向图
+## Directed Graph
 
-数据结构：
+DS：
 
-- 邻接矩阵
-- 邻接表：每个顶点都有一个单链表，存有它所能到达的点。加边：在单链表里加点（通常加到头节点处）
-  - 顶点：拥有一个单链表，存放所有它能走到的点
-  - 加边：例如添加a->b，就在a的单链表加入b
-对于无向图,只需在[加边]时同时存储a->b、b->a即可。
+1. adjacency matrix
+2. adjacency list：Each vertex has a linked list containing the vertices it can reach.
+    - vertex: has a linked list storing all the vertices it can reach.
+    - add edge: add a->b == add b to a's linked list
+    - undirected graph: when adding edge, store both a->b and b->a
 
 ![Alt text](assets/S-G_1/image-1.png)
 ![Alt text](assets/S-G_1/image.png)
 
 
-
-1. 深度优先遍历：一直往下搜，直至最底部，然后回溯，回溯前记得恢复现场
+1. DFS: keep exploring until you hit the bottom, then backtrack, and before backtracking, remember to restore the state.
 
 ```cpp
 int h[N], e[N], ne[N], idx; 
-// h[i]: 第i个单链表（的头结点），对应顶点i，存储顶点i可以到达的点的索引。
-// e[idx]：存储某条边的终点
-// ne[idx]：next指针，存储下一条边的索引
-// idx：当前 边 的索引。记录边的数量和索引的位置
-bool st[N]; // 存储点的遍历情况
+// h[i]: Head of the i-th linked list. corresponds to vertex i, storing the index of the vertices it can reach.
+// e[idx]：store the destination vertex of an edge
+// ne[idx]：next pointer, storing the index of the next edge
+// idx：current index of the edge
+bool st[N]; // store whether a vertex has been visited
 
 void init(){
-    memset(h, -1, sizeof(h)); // 初始化头节点，所有顶点的单链表为空。
+    memset(h, -1, sizeof(h)); // empty head node
 }
 
 // e: a->b
 void add(int a,int b){
-    e[idx] = b; // 边e的终点是b
-    ne[idx] = h[a]; // 将idx添加到a的单链表的头结点处，故idx的next指向 a原本的头结点h[a]
-    h[a] = idx++; // 更新头结点、idx
+    e[idx] = b; // -e->b
+    ne[idx] = h[a]; // -e->b->h[a]
+    h[a] = idx;
+    idx++;
 }
 
 void dfs(int u){
-    st[u] = true; // 点u已经被遍历
-    for(int i = h[u]; i != -1; i = ne[i]){ // 遍历u的可达点集
-        int j = e[i]; // j 是当前边的终点
-        if(!st[j]) dfs(j); // 继续遍历顶点 j
+    st[u] = true; // u is visited
+    for(int i = h[u]; i != -1; i = ne[i]){ // traverse the reachable vertices of u
+        int j = e[i]; // j is the destination of the current edge
+        if(!st[j]) dfs(j); // continue to traverse j
     }
 }
 ```
 
-## 树：无环有向图
+## Tree: Directed Acyclic Graph(DAG)
 
 $$
-O(n+m)，n：顶点数 \qquad m：边数
+O(n+m)，n：number of vertices \qquad m：边数
 $$
 
-## 深度优先遍历在树中的应用
+## Application of Depth-first Search in Trees 
 
-### 树的重心
+### Tree Centroid
 
-定义：使得删去它后剩余子树大小的最大值最小的点
+def: a point in the tree that, when removed, leaves the remaining subtrees with the smallest possible maximum size.
 
-- 删除一个顶点，会使得树变成若干子树。统计子树的大小，记录下最大值max。
-- 遍历所有顶点并进行上述操作，看哪个顶点能使得max最小（子树之间差异不大，比较平衡），则为重心。
+- When a vertex is removed, the tree is split into several subtrees. Calculate the size of each subtree and record the maximum value.
+- iterate through all vertices and perform the above operation. the vertex for which the maximum value is minimized is the centroid. (when the max is the min, the subtrees are balanced)
 
 ```
-给定一颗树，树中包含 n 个结点（编号 1∼n）和 n−1 条无向边。请你找到树的重心，并输出将重心删除后，剩余各个连通块中点数的最大值。
+Given a tree with n nodes (numbered from 1 to n) and n−1 undirected edges, find the centroid of the tree and output the maximum size of the remaining connected components after the centroid is removed.
 
-重心定义：重心是指树中的一个结点，如果将这个点删除后，剩余各个连通块中点数的 最大值 最小，那么这个节点被称为树的重心。
+Definition of centroid: The centroid is a node in the tree such that, when removed, the maximum size of the remaining connected components is minimized.
 
-输入: 第一行包含整数 n，表示树的结点数。接下来 n−1 行，每行包含两个整数 a 和 b
-，表示点 a 和点 b 之间存在一条边。
+Input: The first line contains an integer n, representing the number of nodes in the tree. The next n−1 lines each contain two integers a and b, indicating that there is an edge between node a and node b.
 
-输出：输出一个整数 m，表示将重心删除后，剩余各个连通块中点数的最大值。
+Output: Output an integer m, representing the maximum size of the remaining connected components after the centroid is removed.
+
 ```
 
-思路：不太明白....
+Thought process: It's a bit unclear...
 
-1. dfs求出树中每个子树的大小
-2. 记录**向下**的子树的最大大小
-3. **向上**的子树大小 = 总大小 - **向下**的子树大小
+1. Use DFS to calculate the size of each subtree in the tree.
+2. Record the maximum size of the subtree downward.
+3. The upward subtree size = total size - downward subtree size.
 
 ```cpp
 int n;
@@ -297,26 +297,26 @@ int main(){
 }
 ```
 
-## 宽度优先遍历在图中的应用
+## Applications of Breadth-First Search in Graphs
 
-模版
 
 ```cpp
-d[i] : 源点到点 i 的距离
-queue <- 1
-while queue not empty{
-    扩展 对头 的所有邻居x
-        if x未遍历
+// template
+d[i] : the distance from the source to vertex i
+init: queue <- 1
+while queue is not empty{
+    expand all neighbors x of the head 
+        if x is unvisited (d[x] = -1)
             queue <- x
             d[x] = d[t] + 1
 }
 ```
 
-单源有向图的最短路问题（有源点）
+### single-source shortest path problem in a directed graph
 
 ```
-图：点n 边m，可能有重边、自环
-求出 1 号点到 n 号点的最短距离
+Graph: n vertices, m edges, possibly with multiple edges and self-loops
+Find the shortest distance from vertex 1 to vertex n.
 ```
 
 ```cpp
@@ -363,41 +363,39 @@ int main(){
 }
 ```
 
-# 拓扑排序
+# topological sorting
+
+> AOV network(activity on vertices): A directed graph representing a project, where vertices are activities and a directed edge from a to b indicates that activity a must precede activity b.
 
 
+> In a directed acyclic graph, arrange the vertices in a linear order such that for any directed edge u->v, u appears before v.
 
-> AOV网络(activity on vertices): 用有向图表示一个工程，顶点为活动，有向边a->b表示活动a必须先于活动b进行。
+Detecting a directed cycle is equivalent to constructing the topological order of the AOV network.
 
-> 在有向无环图中，将图中的顶点以线性方式进行排序，使得对于任何有向边 u->v 都可以有u在v的前面
+Dependencies: If there is an edge i->j, then j depends on i (i is a prerequisite for j). Indirect dependency: If there is a path from i to j (i is reachable from j), then j indirectly depends on i.
 
-检测有向环即为对AOV网络构造它的拓扑有序序列。
-
-依赖：如果有 `i->j`，则 j 依赖于 i（i 是 j 的前置条件）
-间接依赖：如果 i 到 j 有路径（i可达j），则 j 间接依赖于 i。
-
-拓扑排序的目标是将所有节点排序，使得排在前面的节点不能依赖于排在后面的节点。
+The goal of topological sorting is to arrange all nodes such that no node depends on any node that appears after it.
 
 ![Alt text](assets/S-G_1/image-2.png)
 
-1. 在AOV网络中选一个没有直接前驱的顶点，并输出之
-2. 从图中删去该顶点，同时删去所有它发出的有向边
+In the AOV network, select a vertex with no direct predecessors and output it.
+Remove this vertex from the graph, along with all its outgoing edges.
+Nodes with in-degree 0 can serve as the starting points. A directed acyclic graph must have at least one node with in-degree 0.
 
-**入度为0**的点可以作为起点。有向**无环**图至少存在一个入度为 0 的点
+Thought process: Continuously construct nodes with in-degree 0.
 
-思路：不断构造入度为 0 的点。
+Initialize the queue: All nodes with in-degree 0 are enqueued.
+Dequeue the head t: Enumerate all outgoing edges t->j of t and remove the edge t->j (just decrease the in-degree of j by 1).
+If j's in-degree becomes 0, enqueue it.
+When the number of enqueues reaches n - 1, the queue represents the final topological order; if not, it means some nodes still have direct predecessors, indicating the presence of a directed cycle, and the topological sequence does not exist.
 
-1. 初始化队列：所有入度为0的点入队
-2. 弹出对头t：枚举 t 的所有出边，并删除边 t->j（只需将 j 的入度-1）
-3. 如果 j 的入度为0，就入队
-4. 入队次数达到n - 1时，队列即为最终的拓扑排序；如果次数不到n-1，说明还剩一些点，这些点都有直接前驱，说明一定存在有向环，拓扑序列不存在。
 
 ```
-d[i]：i的入度
-queue <- 所有入度为0的点
+d[i]：the in-degree of vertex i
+queue <- all vertices with 0 in-degree
 while queue not empty{
-    枚举 对头t 的所有出边 t->j
-        删除 t->j (d[j]--)
+    enumerate all outgoing edges t->j of the head t
+        remove t->j (d[j]--)
         if d[j] == 0
             queue <- j
 }
@@ -445,3 +443,5 @@ int main(){
     else cout << -1;
 }
 ```
+
+
