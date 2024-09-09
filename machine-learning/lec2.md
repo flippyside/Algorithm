@@ -186,4 +186,12 @@ $$
 ![Alt text](assets/lec2/image-7.png)
 
 
+# hw
+
+multiclass classification: framewise phoneme prediction from speech
+
+phoneme(音素、音位): a unit of speech sound in a language that can serve to distinguish one word from the other.
+
+
+
 

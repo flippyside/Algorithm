@@ -1,56 +1,62 @@
+index
+- 括号序列
+
+
+# 括号序列
+
+```t
+problem: 给定一个全是括号的字符串，使其变成一一配对的平衡括号序列。如果不匹配，就在它旁边加一个括号使其匹配。
+([()->()[]()
+```
+
+思路：
+从前往后遍历。
+- 遇到前括号就入栈，遇到后括号就把它和栈顶的前括号匹配。
+    - 如果匹配，就给他俩一个标记，并将栈顶pop。
+    - 如果不匹配就继续。
+输出时，如果没有标记，就补全后输出。否则直接输出。
 
 ```cpp
-#include<iostream>
-#include<cstring>
-using namespace std;
-typedef unsigned long long ull;
-const int N = 1e6, K = 1e4 * 3 + 10;
-char stk1[N], tt1 = -1;
-char stk2[N], tt2 = -1;
+const int N = 1e6;
+struct P{
+    char c;
+    int idx;
+}stk[N];   
 
-// 对于每一个右括号，找它左边还没被弹掉的左括号，如果可以匹配，则出栈，否则补全该括号。
-/*
-()[()]
-])) 
-([(
-()
-]) 
-([
-()[
-]) 
-([
-()[()]
-*/
-string f(string s){
-    int len=s.size();
-    for(int i=len-1;i>=0;i--){
-        if(s[i] == ')'||s[i] == ']'){
-            stk1[++tt1] = s[i];
-        }else{
-            stk2[++tt2] = s[i];
+int tt = -1;
+bool st[N];
+
+void f(string s){
+    int len=s.size(), cnt = 0;
+    char c;
+    string ans = s;
+    for(int i=0;i<len;i++){
+        c = s[i];
+        if(c == '(' || c == '['){
+            stk[++tt].c = c;
+            stk[tt].idx = i;
         }
-    }
-    string ans;
-    while(tt1>=0){
-        char c1 = stk1[tt1--];
-        char c2 = stk2[tt2];
-        if((c2=='('&&c1==')') || (c2=='['&&c1==']')){
-            ans+= (c2+c1);
-            tt2--;
-        }else{
-            int tmp = tt2-1;
-            while(tmp>=0){
-                if((stk2[tmp]=='('&&c1==')') || (stk2[tmp]=='['&&c1==']')){
-                    
-                }
+        else{
+            char top = stk[tt].c;
+            int idx = stk[tt].idx;
+            if((top=='['&&c==']')||(top=='('&&c==')')){
+                tt--; // 弹出左括号
+                st[i] = true; st[idx] = true;
             }
         }
-
+    }
+    for(int i = 0; i < len; i++){
+        if(st[i]) cout << s[i];
+        else{
+            if(s[i]=='(' || s[i]==')')cout<<"()";
+            if(s[i]=='[' || s[i]==']')cout<<"[]";
+        }
     }
 }
 
 int main(){
     string s;
     cin>>s;
+    f(s);
 }
 ```

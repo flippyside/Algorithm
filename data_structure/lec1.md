@@ -1,5 +1,5 @@
 
-
+# chap1
 
 数据：集合 eg全部矩阵
 数据对象：一组实例/值。eg单个矩阵
@@ -19,12 +19,6 @@
 算法的五个特性：
 
 
-空间
-复杂度 (space complexity)是指当问题的规模以某种单位从 1 增加到 n 时，解决这个问题的
-算法在执行时所占用的存储空间也以某种单位由 1 增加到 S(n),则称此算法的空间复杂度为 S(n); 时间复杂度 (time complexity)是指当问题的规模以某种单位从 1 增加到 n 时，解
-•  27• 
-决这个问题的算法在执行时所耗费的时间也以某种单位由 1 增加到 T(n),则称此算法的时
-间复杂度为 T(n) 。
 
 空间复杂度S(n)：问题规模从1->n时，算法占用的存储空间也从1->S(n)
 
@@ -63,9 +57,7 @@ float sum(float a[], const int n){
     return s;count++;
 }
 // 程序步=3n+4
-```
 
-```cpp
 x = sum(R, n);
 // 程序步= 1 +（3n+4）
 ```
@@ -84,6 +76,7 @@ for(int i = 0;i<n;i++){ // n+1
 
 渐进的时间复杂度O(n)：当且仅当存在正整数c和n0，使得`T(n)<=c*f(n)`对所有的`n>=n0`成立，则称该算法的时间增长率在O(f(n))中，记为`T(n) = O(f(n))`
 
+推导过程
 ```
 T(n) = n^3 + 2n^2 + 1
 令n>=n0>=1
@@ -96,82 +89,75 @@ $$
 O(1)<O(log_2n)<O(n)<O()
 $$
 
+```cpp
+void f(float s[][], int m,int n,int k){
+    float sum[];
+    for(int i=0;i<m;i++){ // m
+        sum[i]=0;
+        for(int j=0;j<n;j++) sum[i]+=x[i][j]; // n
+    }// m*n
+    for(int i=0;i<m;i++) cout<<sum[i]; // m
+}
+// O(max(m*n, n)) = O(m*n)
+```
+
+```cpp
+ template <class Type>
+ void dataList<Type>::bubbleSort ( ) {
+ //对表 Element[0] 到 Element[ArraySize-1]
+ //逐趟进行比较, ArraySize 是表当前长度
+       int i = 1;  int exchange = 1;	
+ 	 //当exchange为0则停止排序
+       while ( i < ArraySize && exchange ) {  // n - 1
+           BubbleExchange ( i, exchange );
+           i++;
+      } 	//一趟比较
+ }
+
+template <class Type>
+void dataList<Type>::BubbleExchange(const int i, int & exchange ){
+     exchange = 0;	           //假定元素未交换
+     for ( int j = ArraySize-1; j>=i; j--) // n
+        if ( Element[j-1] > Element[j] ) {	
+	        Swap ( j -1, j );	 //发生逆序
+		//交换Element[j-1]与Element[j]
+            exchange = 1;	//做“发生了交换”标志
+        }
+ }
+
+// O(n^2)
+```
 
 
-渐进的空间复杂度S(n)：在最坏情况下表示问题规模n的某个函数f(n)的数量级，S(n) = O(f(n))，指的是为解决问题所用到的辅助存储空间：临时工作单元、递归工作栈...
+渐进的空间复杂度S(n)：在最坏情况下表示问题规模n的某个函数f(n)的数量级，S(n) = O(f(n))，这里的空间指的是为解决问题所用到的辅助存储空间：临时工作单元、递归工作栈...
 
 
 
 
-求时间复杂度：
+求复杂度：
 ```cpp
 int i = 1;
 while(i*i <= n) i++; 
-// sqrt(n)
+// O(sqrt(n))
 ```
 
 ```cpp
 int s=0;
-for(int i = 1;i <= n;i++) // 
-    for(j = i * i; j <= n; j++)
+for(int i = 1;i <= n;i++) // n
+    for(j = i * i; j <= n; j++) // i=1, n+1; i=2, n-4+1; i=3, n-9+1...i=\sqrt(n), n-n+1
+    // = n\sqrt(n)-4-9-...-n + n + sqrt(n) = n\sqrt(n)-(\s(n)(\s(n)+1)(2\s{n}+1))/6+n+\s{n}
+    // = n^{3/2} - n^{3/2}/3 = 2/3 n^{3/2}
         s = s+1;
+// O(n^{3/2})
 ```
 
 
+# chap2
 
 
-<!-- ```c
-int idx, e[N], l[N], r[N];
 
-void i(){r[0]=1;l[1]=0;idx=2;}
 
-void ath(){
-    r[idx]=r[head];
-    r[head]=idx;l[r[head]]=idx;
-    l[idx]=head;
-}
 
-void insert(int k, int x){
-    e[idx]=x;
-    r[idx]=r[k];
-    l[r[k]]=idx;
-    r[k]=idx;
-    l[idx]=k;
-}
 
-void remove(int k){//删除k
-    r[l[k]]=r[k];
-    l[r[k]]=l[k];
-} -->
 
-// // 输入一个表达式，求其前缀、后缀形式
 
-// void pre(char s[]){
-//     for(int i=0;s[i]!='\0';i++){
-//         if(s[i]!='('&&s[i]!=')'&&s[i]!='+'){
-//             if(s[i+2]=='(') continue;
-
-//         }
-//     }
-// }
-
-// int hh=0,tt=-1,q[N];
-// q[++tt]=x; // insert
-// q[hh++];// pop
-// while(hh<=tt)
-// void f(int arr[]){
-//     for(int i=0;i<N;i++){
-//         while(hh <= tt && q[hh]>=arr[i]) hh++; // pop the front
-//         if(hh<=tt) cout<<q[hh];
-//         else cout<<"-1";
-//         q[++tt]=arr[i];
-//     }
-// }
-
-// void w(){
-//     for(int i=0;i<N;i++){
-//         q[++tt]=arr[i];
-
-//     }
-// }
-// ```
