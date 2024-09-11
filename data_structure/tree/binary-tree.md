@@ -1,16 +1,40 @@
 index
+
 - binary searching tree
 - balance tree
 
-
 # binary searching tree(BST)
 
+![Alt text](assets/binary-tree/image.png)
+
+1 0
+7 0
+6 0
+4 0
+3 1
+13 0
+14 1
+10 0
+8 5
+
+1 4 7 6 3 13 14 10 8
+
+1 0
+7 0
+6 0
+4 0
+3 1
+13 0
+14 1
+10 0
+8 5
+
 性质：
+
 - 左子树上所有点的值小于其根节点
 - 右子树上所有点的值大于其根节点
 - 空树是bst。bst的左右子树也是bst
 - 操作的时间复杂度：最优O(logn) 最差O(n)
-
 
 ```cpp
 // 二叉搜索树
@@ -119,4 +143,3 @@ int queryKth(T* root, int k){
 }
 
 ```
-
