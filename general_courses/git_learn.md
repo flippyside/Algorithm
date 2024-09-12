@@ -1,3 +1,41 @@
+- 新建一个远程仓库
+- 推送大文件后..
+
+# 新建一个远程仓库
+
+```
+// 首先创建一个本地仓库
+git init
+
+// 生成新的 SSH 密钥
+ssh-keygen -t ed25519 -C "your_new_email@example.com" -f ~/.ssh/id_ed25519_newrepo
+
+// 将新的 SSH 私钥添加到 SSH 代理中
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519_newrepo
+
+// 复制新的 SSH 公钥并将其添加到 GitHub
+cat ~/.ssh/id_ed25519_newrepo.pub 
+
+// 配置 SSH 配置文件
+编辑 ~/.ssh/config 文件: 
+Host github.com-newrepo
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_newrepo  # 或 `~/.ssh/id_rsa_newrepo`
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519  # 或 `~/.ssh/id_rsa`
+
+克隆或更新远程仓库 URL
+git clone git@github.com-newrepo:username/new-repo.git
+或者 git remote set-url origin git@github.com-newrepo:username/new-repo.git
+```
+
+# 推送大文件后..
+
 1. 首先，使用以下命令删除要移除的文件：
 git rm 文件路径
 将 “文件路径” 替换为要删除的文件的实际路径。这将从 Git 仓库中删除该文件，并将其放入暂存区。git rm 相当于 linux rm + git add 命令。

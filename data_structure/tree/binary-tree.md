@@ -1,33 +1,12 @@
 index
 
 - binary searching tree
+  - 
 - balance tree
 
 # binary searching tree(BST)
 
 ![Alt text](assets/binary-tree/image.png)
-
-1 0
-7 0
-6 0
-4 0
-3 1
-13 0
-14 1
-10 0
-8 5
-
-1 4 7 6 3 13 14 10 8
-
-1 0
-7 0
-6 0
-4 0
-3 1
-13 0
-14 1
-10 0
-8 5
 
 性质：
 
@@ -35,6 +14,7 @@ index
 - 右子树上所有点的值大于其根节点
 - 空树是bst。bst的左右子树也是bst
 - 操作的时间复杂度：最优O(logn) 最差O(n)
+- BST的中序遍历输出的序列是升序序列
 
 ```cpp
 // 二叉搜索树
@@ -142,4 +122,170 @@ int queryKth(T* root, int k){
 // TODO
 }
 
+```
+
+
+
+P5076待调整!!!!!卡了我两天了
+
+```cpp
+
+// BST
+// 注意：特判 特判 特判！t[ & ] 的 & 是不是等于-1！
+
+int idx = -1;
+struct T{
+    int x;
+    int l = -1;
+    int r = -1;
+    int cnt; // 出现次数
+    int sz = 0; // 子树大小(包括自己)
+} t[N];
+
+
+int add(int rt, int e){
+    if(rt == -1) { 
+        idx++; 
+        t[idx].l = t[idx].r = -1; 
+        t[idx].x = e; 
+        t[idx].sz = 1; // 初始化大小为1
+        t[idx].cnt = 1; // 初始化计数为1
+        return idx; 
+    }
+    t[rt].sz++; // //如果查到这个节点，说明这个节点的子树里面肯定有v
+    if(e < t[rt].x) {
+        t[rt].l = add(t[rt].l, e); 
+    }
+    else if(e > t[rt].x) {
+        t[rt].r = add(t[rt].r, e); 
+    }else{
+        t[rt].cnt++; // 重复出现
+    }
+    return rt; // !!!!
+}
+
+int findMaxNode(int rt){ // 返回最大结点的下标
+    if(rt == -1) return -1;
+    while(t[rt].r != -1) rt = t[rt].r;
+    return rt;
+}
+
+int findMinNode(int rt){ // 返回最小结点的下标
+    if(rt == -1) return -1;
+    while(t[rt].l != -1) rt = t[rt].l;
+    return rt;
+}
+
+int fd(int rt, int e){ // 返回值为e的结点的下标
+    if(rt == -1) return -1;
+    if(e < t[rt].x) return fd(t[rt].l, e); // 递归调用需要返回值!!!!!
+    else if(e > t[rt].x) return fd(t[rt].r, e);
+    else return rt;
+}
+
+// 找x的父节点，返回下标
+int findFather(int rt = 0, int x = 0, int pre = -1){
+    if(rt == -1) return -1;
+    if(x < t[rt].x) return findFather(t[rt].l, x, rt);
+    else if(x > t[rt].x) return findFather(t[rt].r, x, rt);
+    else return pre;
+}
+
+/*
+如果x为左节点：rk = 左子树大小
+右：rk = 父节点的左子树大小 + 左子树大小
+*/
+int ranking(int rt, int x){ // 集合中小于 x 的数的个数 +1。
+    if(rt == -1) return 0;
+    if(x < t[rt].x) return ranking(t[rt].l, x);
+    else if(x > t[rt].x) {
+        if(t[rt].l == -1) return ranking(t[rt].r, x) + 1;
+        else return ranking(t[rt].r, x) + t[t[rt].l].sz + 1;
+    }
+    else {
+        if(t[rt].l == -1) return 1;
+        else return t[t[rt].l].sz + 1;
+    }
+}
+
+int ans = 0;
+void queryRkX(int rt, int& k){ // 查询 排名为 k 的结点的值
+    if(rt == -1) return;
+    queryRkX(t[rt].l, k);
+    k--;
+    if(k == 0) ans = t[rt].x; 
+    queryRkX(t[rt].r, k);
+}
+
+/*
+如果节点有左子树：
+前驱节点就是该左子树中最大值的节点（即左子树中最右的节点）。
+如果节点没有左子树：
+需要从该节点开始向上追溯其父节点，直到找到第一个比该节点小的祖先节点。这个祖先节点就是前驱节点。
+*/
+
+int queryPrex(int rt, int x, int ans){// 求x的前驱：小于x，且最大的数
+    int idx = fd(rt, x);
+    if(idx == -1) return -2147483647;
+    if(t[idx].l != -1){
+        return t[findMaxNode(t[idx].l)].x;
+    }else{
+        int father = findFather(rt, x, -1);
+        while(father != -1){
+            if(t[father].x < x) return t[father].x;
+            father = findFather(rt, t[father].x, -1);
+        }
+        return -2147483647;
+    }
+}
+
+int queryPost(int rt, int x){ // 求x的后继：大于x，且最小的数
+    // 有右结点：右结点子树的最小值
+    // 无：第一个大于x的父节点
+    int idx = fd(rt, x);
+    if(idx == -1) return 2147483647;
+    if(t[idx].r == -1) {
+        int father = findFather(rt, x, -1);
+        while(father != -1){
+            if(t[father].x > x) return t[father].x;
+            father = findFather(rt, t[father].x, -1);
+        }
+        return 2147483647;
+    }else{
+        return t[findMinNode(t[idx].r)].x;
+    }
+}
+
+int main(){
+    int q, op, x;
+    cin >> q;
+    int rt = -1;
+    while(q--){
+        cin >> op >> x;
+        switch(op){
+            case 1:{
+                cout << ranking(rt, x) << endl;
+                break;
+            }
+            case 2:{
+                ans = 0;
+                queryRkX(rt, x);
+                cout << ans << endl;
+                break;
+            }
+            case 3:{ // 求x的前驱：小于x，且最大的数
+                cout << queryPrex(rt, x, -2147483647) << endl;
+                break;
+            }
+            case 4:{ // 求x的后继：大于x，且最小的数
+                cout << queryPost(rt, x) << endl;
+                break;
+            }
+            case 5:{
+                rt = add(rt, x);
+                break;
+            }
+        }
+    }
+}
 ```
