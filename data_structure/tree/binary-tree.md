@@ -1,12 +1,20 @@
 index
 
 - binary searching tree
-  - 
-- balance tree
+  - 性质、数据结构
+  - 操作：添加、遍历、查找、删除、最值、排名
+  - application
+- self balance tree
+  - AVL
+  - red and black
+  - splay
 
 # binary searching tree(BST)
 
 ![Alt text](assets/binary-tree/image.png)
+
+> a BST is a binary tree where every node in the left subtree is less than the root, and every node in the right tree is larger than the root. The properties of BST are recrusive: if we consider any node as a root, the properties remain true.
+
 
 性质：
 
@@ -16,25 +24,34 @@ index
 - 操作的时间复杂度：最优O(logn) 最差O(n)
 - BST的中序遍历输出的序列是升序序列
 
+### 基础操作
+
+数据结构：指针
+
 ```cpp
-// 二叉搜索树
 struct T{
     int e;
     T* l;
     T* r;
     int sz; // 当前节点为根的子树大小
-    int cnt; // 当前节点的重复数量
+    int cnt; // 当前节点的重复数量。1表示只出现1次。
     T(int val) : e(val), sz(1), cnt(1), l(nullptr), r(nullptr) { }
 };
+```
 
-void traverse(T* root){ // 遍历
+```cpp
+void traverse(T* root){ // 中序遍历
     if(root==nullptr) return;
     traverse(root->l);
     cout << root->e;
     traverse(root->r);
 }
+```
 
-// 返回最大、最小值: 位于最右边、最左边
+返回最值: 
+- 最大值位于最右边，最小值位于最左边
+
+```cpp
 int findMin(T* root){
     if(root == nullptr) return -1;
     while(root->l != nullptr) root = root->l;
@@ -46,87 +63,204 @@ int findMax(T*root){
     return root->e;
 }
 
-// 返回最大值的节点
+// 返回最大值节点
 T* findMaxNode(T*root){
     if(root == nullptr) return nullptr;
     while(root->r != nullptr) root=root->r;
     return root;
 }
+```
 
-// 搜索
-T* find(T* r, int e){
-    if(r == nullptr) return nullptr;
-    if(r->e > e) find(r->l, e);
-    else if(r->e < e) find(r->r, e);
-    else return r;
+搜索：根据当前值与目标值的大小关系，决定往左or右走
+
+```cpp
+// 给定数值e，搜索，返回结点
+T* search(T* r, int e){
+    if(r == nullptr || r->e == e) return r;
+    if(r->e > e) return search(r->l, e);
+    else return search(r->r, e); // r->e < e
 }
+```
 
-// 插入一个节点
-T* add(T* root, int e){
-    T* newT = new T(e);
-    if(root == nullptr) return newT;
-    if(root->e > e){
-        root->l = add(root->l, e);
+用迭代实现的search
+
+```cpp
+T* IteractiveSearch(T* rt, int e){
+    while(rt != nullptr){
+        if(e < rt->e ) rt = rt->l;
+        else if(e > rt->e) rt = rt->r;
+        else return rt;
     }
-    else if(root->e < e){
-        root->r = add(root->r, e);
-    }
-    else{ // 重复的  
-        root->cnt++;
-    }
-    // 更新节点的子树大小??
-    if(root->l != nullptr) root->sz = root->cnt + root->l->sz;
-    if(root->r != nullptr) root->sz = root->cnt + root->r->sz;
+    return nullptr;
+}
+```
+
+插入一个节点：根据性质，小于当前结点的值往左子树插，大于往右子树插
+T: O(h)  S: O(1)
+
+```cpp
+T* insert(T* root, int e){
+    if(root == nullptr) return new T(e);
+    root->sz++;
+    if(root->e > e) root->l = insert(root->l, e);
+    else if(root->e < e) root->r = insert(root->r, e);
+    else root->cnt++;
     return root;
 }
+```
 
+删除一个结点：
+- 首先递归找这个节点
+- 找到后：
+  - 如果cnt>1，说明有重复，cnt-1即可
+  - 如果只有一个孩子，就用这个孩子代替它
+  - 如果有两个孩子，就用他的中序遍历后继(例如，左子树的最右节点)代替它
+
+```cpp
 // root = remove(root, 1)
 T* remove(T* root, int e){
-    if(root == nullptr){return nullptr;}
-    else if(e < root->e){
-        root = remove(root->l, e);
-    }else if(e > root->e){
-        root = remove(root->r, e);
-    }else{
+    if(root == nullptr) return nullptr;
+    else if(e < root->e) root->l = remove(root->l, e);
+    else if(e > root->e) root->r = remove(root->r, e);
+    else{ // e == root->e，删除root
         if(root->cnt > 1) root->cnt--;
         else{
-            if(root->l == nullptr){
+            // 只有一个孩子，就用这个孩子代替它
+            if(root->l == nullptr){ 
                 T* tmp = root->r;
                 delete root;
                 return tmp;
-            } else if(root->r == nullptr){
+            } else if(root->r == nullptr){ 
                 T* tmp = root->l;
                 delete root;
                 return tmp;
-            } else{ // 用左子树的最右节点(最大值)代替要删去的节点
-                T* maxNode = findMaxNode(root->l);
-                root->e=maxNode->e; root->cnt=maxNode->cnt;
-                // 删去原先的最右节点
-                maxNode->cnt = 1;
-                root->l = remove(root->r, maxNode->e);
+            } else{ 
+                // 有两个孩子，就用its inorder successor（左子树的最右节点(最大节点)）代替它
+                T* succ = findMaxNode(root->l);
+                root->e = succ->e; root->cnt = succ->cnt; // copy
+                // 删去successor
+                succ->cnt = 1; // 便于删去
+                root->l = remove(root->l, succ->e);
             }
         }
     }
     return root;
 }
+```
 
-// 名次：将数组元素升序排序后第一个相同元素之前的数的个数加一。
+### 求元素的排名 & 查找排名为 k 的元素
+
+排名定义为将数组元素升序排序后第一个相同元素之前的数的个数加一。
+查找一个元素的排名，首先从根节点跳到这个元素，若向右跳，答案加上左儿子节点个数加当前节点重复的数个数，最后答案加上终点的左儿子子树大小加一。
+时间复杂度 O(h)。
+
+```cpp
 int queryRank(T*root, int e){
-    int rk = 0;
-// TODO
-    return rk;
+    if(root == nullptr) return 0;
+    if(e > root->e) return queryRank(root->r, e) + root->cnt + (root->l ? root->l->sz : 0);
+    else if(e < root->e) return queryRank(root->l, e);
+    else{
+        return (root->l ? root->l->sz : 0) + 1;
+    }
 }
+```
 
-// 查找排名为 k 的元素
+查找排名为 k 的元素
+在一棵子树中，根节点的排名取决于其左子树的大小。
+若其左子树的大小大于等于 k，则该元素在左子树中；
+若其左子树的大小在区间 [k-cnt,k-1]（count 为当前结点的值的出现次数）中，则该元素为根节点；
+若其左子树的大小小于 k-cnt，则该元素在右子树中。
+时间复杂度 O(h)。
+
+```cpp
 int queryKth(T* root, int k){
-// TODO
+    if(root == nullptr) return INF * -1; // 不存在
+    if(root->l){
+        if(root->l->sz >= k) return queryKth(root->l, k); // 则该元素在左子树中
+        else if(root->l->sz + root->cnt >= k) return root->e; // 为根节点
+    }
+    else{ // 左子树为空 
+        if(k == 1) return root->e; // special judge?
+    }
+    // root->l->sz < k - root->cnt 该元素在右子树中
+    return queryKth(root->r, k - (root->l ? root->l->sz : 0) - root->cnt);
 }
 
 ```
 
+### 检查树是不是BST
+
+法一：中序遍历，看是不是升序排列
+
+```cpp
+bool isBST(T* rt, T* pre = nullptr){
+    if(rt != nullptr) return true;
+
+    if(!isBST(rt->l, pre)) return false;
+    if(pre != nullptr && pre->e >= rt->e) return false;
+    pre = rt;
+    return isBST(rt->r, pre);
+}
+```
+
+### 求前驱与后继
 
 
-P5076待调整!!!!!卡了我两天了
+返回e的前驱元素的值(inorder predecessor)
+solution1: inorder traversal
+
+返回e的后继结点(inorder successor)
+- if current node is e, ans it has right child: successor is the min in the right subtree
+- if current node is larger than e, then it might be the answer, 
+   we just let it be the answer and proceed to left
+- if smaller, proceed to right
+
+```cpp
+void queryPrex(T* rt, int e, T*& pre){
+    if(rt == nullptr) return;
+    queryPrex(rt->l, e, pre);
+    if(rt->e < e) pre = rt;
+    queryPrex(rt->r, e, pre);
+}
+
+T* queryPost(T* rt, int e){
+    if(rt == nullptr) return nullptr;
+    if(rt->e == e && rt->l != nullptr) return findMinNode(rt->r);
+    
+    T* succ = nullptr;
+    T* cur = rt;
+    while(cur != nullptr){
+        if(e < cur->e) {
+            succ = cur;
+            cur = cur->l;
+        }
+        else if(e > cur->e) cur = cur->r;
+        else break;
+    }
+    return succ;
+}
+```
+
+法二：inorder traverse
+
+```cpp
+void queryPost_2(T* rt, int e, T*& suc){
+    if(rt == nullptr) return;
+
+    queryPost_2(rt->l, e, suc);
+    if(rt->e > e && (!suc || (suc && suc->e > rt->e))) suc = rt;
+    queryPost_2(rt->r, e, suc);
+}
+```
+
+
+
+
+
+
+### 数组实现
+
+P5076待调整!!!!!卡关
 
 ```cpp
 
@@ -289,3 +423,20 @@ int main(){
     }
 }
 ```
+
+## application
+
+- self-balancing BST
+- maintain a sorted stream of data
+- double ended priority queues(双端优先队列)
+
+
+
+# self balance tree
+
+## AVL
+
+> the difference between heights of left and right subtrees for any node cannot be more than 1
+
+
+
