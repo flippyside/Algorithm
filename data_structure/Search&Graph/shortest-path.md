@@ -14,8 +14,58 @@ index
 
 # 最短路问题
 
-稠密图：邻接矩阵
-稀疏图：邻接表
+
+## 单源有向图的最短路问题（有源点）
+
+```
+图：点n 边m，可能有重边、自环
+求出 1 号点到 n 号点的最短距离
+```
+
+```cpp
+const int N = 100010, M = 1e6 * 2;
+int n,m;
+int h[N], e[M], ne[M], idx;
+int q[N];
+int d[N];
+bool st[N];
+void add(int a, int b){
+    e[idx]=b;ne[idx]=h[a];h[a]=idx++;
+}
+
+int bfs(){
+    // 初始化
+    int hh = 0, tt = 0;
+    q[tt] = 1;
+    d[1] = 0;
+  
+    while(hh <= tt){
+        int t = q[hh++];
+        for(int i = h[t]; i != -1; i = ne[i]){
+            int j = e[i];
+            if(d[j] == -1){ // j未被遍历
+                q[++tt] = j;
+                d[j] = d[t] + 1;
+            }
+        }
+    }
+    return d[n];
+}
+
+int main(){
+    cin >> n >> m;
+    memset(h,-1,sizeof h);
+    memset(d,-1,sizeof d);
+    while(m--){
+        int a,b;
+        cin>>a>>b;
+        add(a,b);
+    }
+    int t = bfs();
+    cout << t;
+}
+```
+
 
 n：点  m：边
 
