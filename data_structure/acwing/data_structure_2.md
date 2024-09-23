@@ -1,4 +1,5 @@
 index
+
 - trie
 - 并查集
 - 堆
@@ -95,6 +96,47 @@ if(belong[x] == belong[y])：x、y是否在一个集合
 1. 判断树根：树根的p[x] == x。`if(p[x] == x)`
 2. 求x的集合编号：一直往上走。`while(p[x] != x) x = p[x];`
 3. 合并两个集合：x、y为两个集合的根节点，`p[x] = y`
+4. 看是否在同一个集合(同一棵树)：`fd(x) == fd(y)`
+
+
+
+```cpp
+
+// 并查集 p[x] = y 表示y属于x
+int p[N];
+
+// 寻找x的根节点
+int fd(int x){
+    if(p[x] == x) return p[x];
+    return fd(p[x]);
+}
+
+void merge(int x, int y){
+    p[fd(x)] = fd(y);
+}
+
+int main(){
+    int n,m,q,x,y;
+    memset(p,-1,sizeof p);
+    cin>>n>>m>>q;
+    for(int i = 0; i <= n; i++) // 初始化：每个结点的祖先是它自己
+        p[i] = i;
+    while(m--){
+        cin>>x>>y;
+        merge(x,y);
+    }
+    while(q--){
+        cin>>x>>y;
+        // cout<<fd(x)<<' '<<fd(y)<<endl;
+        if(fd(x) == fd(y)) cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
+    }
+}
+
+
+```
+
+
 
 优化：
 2. 往上走过一遍之后，直接把走过的路上的所有点连到找到的根节点上，后续无需再走。

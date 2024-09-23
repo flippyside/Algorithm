@@ -1,3 +1,12 @@
+链表
+
+- 单链表
+- 双链表
+- 邻接表
+- 单循环链表
+- 双向循环链表
+- 多项式
+- 其它知识
 
 
 # 链表与邻接表
@@ -260,6 +269,48 @@ head[3]-> ->...
 ...
 ```
 
-## 循环链表
+## 单循环链表
+
+## 双向循环链表
+
+## other
+
+### static
+
+全局变量、static修饰的变量存放在静态存储区
+
+静态成员变量：声明类定义时，就为它分配存储空间。所有对象共享。
+
+
+```cpp
+f(){
+    int a = 1;
+    static int b = 1;
+    b = b + a;
+    cout << a << b;
+}
+int main(){
+    f();
+// 1 2
+    f();
+// 1 3
+}
+```
+
+```cpp
+class Polynomial{
+    struct Term{
+        //...
+    };
+
+    static Term termArray[maxTerms];
+    static int free, maxTerms;
+private:
+    int start, finish;
+};
+```
+
+普通成员变量：声明类定义时，不会为它分配存储空间。只有在声明类的对象(实例化)时，才会为它分配空间
+
 
 

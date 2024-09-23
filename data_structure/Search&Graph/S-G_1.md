@@ -1,10 +1,11 @@
 index
+
 - DFS
 - BFS
-- 树和图的遍历 
+- 树和图的遍历
   - 有向图
-  - 树：无环有向图 
-  - 深度优先遍历在树中的应用 
+  - 树：无环有向图
+  - 深度优先遍历在树中的应用
   - 宽度优先遍历在图中的应用
 - 拓扑排序
 
@@ -130,9 +131,9 @@ void dfs(int x, int y, int s){ // x：行 y：列 s：已经放了几个皇后
 
 1. 把起始点放入 queue
 2. 重复下述2步骤，直到 queue 为空为止：
+
 - 取出队头；
 - 找出与此点 邻接的 且 尚未遍历 的点，进行标记，然后全部放入queue中。
-
 
 ```
 给定一个 n×m 的二维整数数组，用来表示一个迷宫，数组中只包含 0 或 1，其中 0 表示可以走的路，1 表示不可通过的墙壁。最初，有一个人位于左上角 (1,1) 处，已知该人每次可以向上、下、左、右任意一个方向移动一个位置。请问，该人从左上角移动至右下角 (n,m) 处，至少需要移动多少次。
@@ -179,20 +180,20 @@ int bfs(){
 
 ## 有向图
 
-数据结构：
+### 数据结构
 
 - 邻接矩阵
 - 邻接表：每个顶点都有一个单链表，存有它所能到达的点。加边：在单链表里加点（通常加到头节点处）
   - 顶点：拥有一个单链表，存放所有它能走到的点
   - 加边：例如添加a->b，就在a的单链表加入b
-对于无向图,只需在[加边]时同时存储a->b、b->a即可。
+    对于无向图,只需在[加边]时同时存储a->b、b->a即可。
 
 ![Alt text](assets/S-G_1/image-1.png)
 ![Alt text](assets/S-G_1/image.png)
 
+### 深度优先遍历
 
-
-1. 深度优先遍历：一直往下搜，直至最底部，然后回溯，回溯前记得恢复现场
+一直往下搜，直至最底部，然后回溯，回溯前记得恢复现场
 
 ```cpp
 int h[N], e[N], ne[N], idx; 
@@ -219,6 +220,70 @@ void dfs(int u){
         int j = e[i]; // j 是当前边的终点
         if(!st[j]) dfs(j); // 继续遍历顶点 j
     }
+}
+
+
+```
+
+### 链表实现dfs、bfs
+
+```cpp
+struct N{
+    int v;
+    N* ne;
+    N(int v, N* ne = nullptr) : v(v), ne(ne){ }
+};
+
+struct G{
+    int v;
+    N* head = new N(-1); // dummy head
+}g[M];
+bool st[M];
+
+// 插入时，链表维持升序
+void add(int x, int y){
+    N* cur = g[x].head;
+    while(cur->ne != nullptr && cur->ne->v < y){
+        cur = cur->ne;  
+    }
+    cur->ne = new N(y, cur->ne);
+}
+
+void dfs(int u){
+    cout << u << ' ';
+    st[u] = true;
+    for(N* cur = g[u].head->ne; cur != nullptr; cur = cur->ne)
+        if(!st[cur->v]) dfs(cur->v);
+}
+
+void bfs(int u){
+    int q[M], hh = 0, tt = -1;
+    cout << u << ' ';
+    st[u] = true;
+    q[++tt] = u;
+    while(hh <= tt){
+        int j = q[hh++];
+        for(N* cur = g[j].head->ne; cur != nullptr; cur = cur->ne){
+            if(!st[cur->v]){
+                cout << cur->v << ' ';
+                st[cur->v] = true;
+                q[++tt] = cur->v;
+            }
+        }
+    }
+}
+
+int main(){
+    int n,m,x,y;
+    cin>>n>>m;
+    while(m--){
+        cin>>x>>y;
+        add(x, y);
+    }
+    dfs(1);  
+    cout << endl;
+    memset(st, 0, sizeof st);
+    bfs(1);
 }
 ```
 
@@ -365,8 +430,6 @@ int main(){
 
 # 拓扑排序
 
-
-
 > AOV网络(activity on vertices): 用有向图表示一个工程，顶点为活动，有向边a->b表示活动a必须先于活动b进行。
 
 > 在有向无环图中，将图中的顶点以线性方式进行排序，使得对于任何有向边 u->v 都可以有u在v的前面
@@ -385,7 +448,7 @@ int main(){
 
 **入度为0**的点可以作为起点。有向**无环**图至少存在一个入度为 0 的点
 
-思路：不断构造入度为 0 的点。
+思路：不断构造入度为 0 的点。这是一个不断割边的过程，边割完后入度为0，也就没有了前置条件，可以加入队列。
 
 1. 初始化队列：所有入度为0的点入队
 2. 弹出对头t：枚举 t 的所有出边，并删除边 t->j（只需将 j 的入度-1）
