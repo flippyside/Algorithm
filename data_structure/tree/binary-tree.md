@@ -109,13 +109,19 @@ T* remove(T* root, int e){
 // 名次：将数组元素升序排序后第一个相同元素之前的数的个数加一。
 int queryRank(T*root, int e){
     int rk = 0;
-// TODO
-    return rk;
+// TODO 左子树
+    T* t = find(root, e);
+    return t->sz;
+
 }
 
 // 查找排名为 k 的元素
 int queryKth(T* root, int k){
 // TODO
+    if(root->sz == k) return root;
+    else{
+        queryKth(root->l, k);
+    }
 }
 
 ```

@@ -1,0 +1,6 @@
+﻿  01.cpp
+D:\code\C++\leetcode\001\01.cpp(17,25): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+D:\code\C++\leetcode\001\01.cpp(21,15): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+D:\code\C++\leetcode\001\01.cpp(41,28): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+D:\code\C++\leetcode\001\01.cpp(53,25): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+  001.vcxproj -> D:\code\C++\leetcode\001\x64\Debug\001.exe

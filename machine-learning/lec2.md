@@ -1,8 +1,11 @@
 # What to do if my network fails to train
 
 index
+
 - 基本术语
-- 常用方法
+- discriminate local minima and saddle point
+- classification
+- batch normalization
 
 critical point(驻点): 所有一阶偏导数都为零（梯度向量为零向量）的点
 
@@ -44,7 +47,6 @@ large batch v.s. small batch
 the minima on the plain(flat minima) is better than the minima in the canyon(sharp minima).
 ![Alt text](images/image-12.png)
 
-
 ### gradient descent + momentum
 
 movement = (movement of last step)- (gradient at present)
@@ -53,12 +55,12 @@ movement = (movement of last step)- (gradient at present)
 ![Alt text](images/image-14.png)
 
 **momentum can help escape critical points**:
-when reaching the critical point, although the gradient descent stops, the movement will let loss continue to update. 
+when reaching the critical point, although the gradient descent stops, the movement will let loss continue to update.
 and even when the gradient descent tell you to move left, but movement tell you to move right, and movement is larger than the gradient, then loss will update to the right, the direction of momentum.
 
 ### adaptable learning rate自适应学习率
 
-1. Adaptive Gradient Algorithm (Adagrad):an algorithm for gradient-based optimization. 对低频出现的参数进行大的更新，对高频出现的参数进行小的更新。适合于处理稀疏数据。
+1. Adaptive Gradient Algorithm (Adagrad): an algorithm for gradient-based optimization. 对低频出现的参数进行大的更新，对高频出现的参数进行小的更新。适合于处理稀疏数据。
 
 $$
 \begin{split}
@@ -68,7 +70,6 @@ $$
 $$
 
 ![Alt text](assets/lec2/image.png)
-
 
 2. RMSProp(Root Mean Square Prop)
 
@@ -87,10 +88,9 @@ $$
 learning rate scheduling:
 
 - learning rate decay: as the training goes, we are closer to the destination, so we reduce the learning rate.
-![Alt text](assets/lec2/image-1.png)
+  ![Alt text](assets/lec2/image-1.png)
 - warm up: increase and then decrease
-![Alt text](assets/lec2/image-2.png)
-
+  ![Alt text](assets/lec2/image-2.png)
 
 ## classification
 
@@ -112,8 +112,8 @@ exp(x)=e^x\\
 y_i'=\frac{exp(y_i)}{\sum{exp(y_i)}}
 \end{split}
 $$
-![Alt text](assets/lec2/image-4.png)
 
+![Alt text](assets/lec2/image-4.png)
 
 ### loss of classification
 
@@ -126,23 +126,25 @@ $$
 Maximum Likelihood Estimation, MLE(最大似然估计)：
 
 首先定义似然函数：
+
 $$
 L(\theta)=\prod_{i=1}^N p(y_i|x_i;\theta)
 $$
 
 对数似然函数：取对数，以简化计算：
+
 $$
 \log L(\theta)=\sum_{i=1}^N \log p(y_i|x_i;\theta)
 $$
 
 最大化对数似然函数：
+
 $$
 \hat \theta=\arg \max_\theta \sum_{i=1}^N \log p(y_i|x_i;\theta)
 $$
 
 **minimizing cross-entropy** is equivalent to **maximizing likelihood**
 最大似然和最小化交叉熵是等价的。因为它们追求同一个目标：使得预测值与真实值之间的匹配程度最大。
-
 
 ## batch normalization
 
@@ -155,6 +157,7 @@ $$
 \widetilde{x_i^r}\gets\frac{x_i^r-m_i}{\sigma_i}
 \end{split}
 $$
+
 the means of all dims are 0, and the variances are all 1
 
 same, we do normalization on the z.
@@ -168,12 +171,12 @@ $$
 \widetilde{z_i^r}\gets\frac{x^i-\eta}{\sigma}
 \end{split}
 $$
+
 ![Alt text](assets/lec2/image-5.png)
 
 Because the network is too large, so we consider a batch once. This is the Batch Normalization.
 
 ![Alt text](assets/lec2/image-6.png)
-
 
 internal covariate shift
 
@@ -185,13 +188,8 @@ $$
 
 ![Alt text](assets/lec2/image-7.png)
 
-
 # hw
 
 multiclass classification: framewise phoneme prediction from speech
 
 phoneme(音素、音位): a unit of speech sound in a language that can serve to distinguish one word from the other.
-
-
-
-
