@@ -1,0 +1,1 @@
+enum class Special {none,awake, aoe, icy, poison, teleport };

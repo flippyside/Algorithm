@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "preLaunchTask": "Build", //调试会话开始前执行的任务，一般为编译程序。与tasks.json的label相对应
+      "name": "(lldb) 启动",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/petunia/code/Algorithm/problems",
+      "program": "/Users/petunia/code/Algorithm/problems/build/Debug/outDebug"
+    }
+  ]
+}

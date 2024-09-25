@@ -1,0 +1,1241 @@
+{
+    "affixManager": {
+        "affixList_enemy": [
+            {
+                "isOccupied": true,
+                "ownerType": "Enemy",
+                "type": 5
+            },
+            {
+                "isOccupied": true,
+                "ownerType": "Enemy",
+                "type": 5
+            }
+        ],
+        "affixList_tower": [
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 3
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 0
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 2
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 2
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 1
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 1
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 3
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 3
+            },
+            {
+                "isOccupied": false,
+                "ownerType": "None",
+                "type": 2
+            }
+        ]
+    },
+    "coin": 14,
+    "conditionMap": {
+        "gridAndTower": [
+            {
+                "coordinate": {
+                    "direction": 1,
+                    "x": 175,
+                    "y": 225
+                },
+                "tower": {
+                    "affixSlot": [
+                    ],
+                    "alive": true,
+                    "attackInterval": 250,
+                    "attackPower": 50,
+                    "attackTime": 94,
+                    "attack_counter": 11,
+                    "blockList": null,
+                    "blocking": false,
+                    "cost": 5,
+                    "defence": 10,
+                    "hasDropped": true,
+                    "hit_counter": 11,
+                    "hp": 490,
+                    "level": 0,
+                    "levelUP_material": 5,
+                    "name": 0,
+                    "position": {
+                        "direction": 1,
+                        "x": 175,
+                        "y": 225
+                    },
+                    "range": 100,
+                    "teleport": false,
+                    "teleportTime": 0,
+                    "totalHP": 500,
+                    "type": 0
+                }
+            },
+            {
+                "coordinate": {
+                    "direction": 3,
+                    "x": 325,
+                    "y": 225
+                },
+                "tower": {
+                    "affixSlot": [
+                    ],
+                    "alive": true,
+                    "attackInterval": 250,
+                    "attackPower": 200,
+                    "attackTime": 212,
+                    "attack_counter": 15,
+                    "blockList": {
+                        "affixSlot": [
+                        ],
+                        "alive": false,
+                        "attackInterval": 250,
+                        "attackPower": 20,
+                        "attackTime": 56,
+                        "attackable": true,
+                        "bleeding": false,
+                        "bleedingTime": 0,
+                        "blocked": true,
+                        "defence": 10,
+                        "end": {
+                            "direction": 3,
+                            "x": 725,
+                            "y": 475
+                        },
+                        "hp": 0,
+                        "icy": false,
+                        "icyTime": 0,
+                        "level": 0,
+                        "next_position": {
+                            "direction": 3,
+                            "x": 325,
+                            "y": 225
+                        },
+                        "pathType": 0,
+                        "path_index": 10,
+                        "position": {
+                            "direction": 3,
+                            "x": 305,
+                            "y": 223
+                        },
+                        "range": 100,
+                        "speed": 1,
+                        "speedUp": false,
+                        "teleport": false,
+                        "teleportTime": 0,
+                        "totalHP": 500
+                    },
+                    "blocking": false,
+                    "cost": 5,
+                    "defence": 10,
+                    "hasDropped": true,
+                    "hit_counter": 15,
+                    "hp": 350,
+                    "level": 1,
+                    "levelUP_material": 5,
+                    "name": 1,
+                    "position": {
+                        "direction": 3,
+                        "x": 325,
+                        "y": 225
+                    },
+                    "range": 50,
+                    "teleport": false,
+                    "teleportTime": 0,
+                    "totalHP": 500,
+                    "type": 1
+                }
+            },
+            {
+                "coordinate": {
+                    "direction": 1,
+                    "x": 425,
+                    "y": 275
+                },
+                "tower": {
+                    "affixSlot": [
+                    ],
+                    "alive": true,
+                    "attackInterval": 250,
+                    "attackPower": 50,
+                    "attackTime": 162,
+                    "attack_counter": 0,
+                    "blockList": null,
+                    "blocking": false,
+                    "cost": 5,
+                    "defence": 10,
+                    "hasDropped": false,
+                    "hit_counter": 0,
+                    "hp": 500,
+                    "level": 0,
+                    "levelUP_material": 5,
+                    "name": 0,
+                    "position": {
+                        "direction": 1,
+                        "x": 425,
+                        "y": 275
+                    },
+                    "range": 100,
+                    "teleport": false,
+                    "teleportTime": 0,
+                    "totalHP": 500,
+                    "type": 0
+                }
+            },
+            {
+                "coordinate": {
+                    "direction": 3,
+                    "x": 525,
+                    "y": 225
+                },
+                "tower": {
+                    "affixSlot": [
+                    ],
+                    "alive": true,
+                    "attackInterval": 250,
+                    "attackPower": 100,
+                    "attackTime": 0,
+                    "attack_counter": 2,
+                    "blockList": {
+                        "affixSlot": [
+                        ],
+                        "alive": false,
+                        "attackInterval": 250,
+                        "attackPower": 20,
+                        "attackTime": 106,
+                        "attackable": true,
+                        "bleeding": false,
+                        "bleedingTime": 0,
+                        "blocked": true,
+                        "defence": 10,
+                        "end": {
+                            "direction": 3,
+                            "x": 725,
+                            "y": 475
+                        },
+                        "hp": 0,
+                        "icy": false,
+                        "icyTime": 0,
+                        "level": 0,
+                        "next_position": {
+                            "direction": 3,
+                            "x": 525,
+                            "y": 225
+                        },
+                        "pathType": 0,
+                        "path_index": 14,
+                        "position": {
+                            "direction": 3,
+                            "x": 505,
+                            "y": 223
+                        },
+                        "range": 100,
+                        "speed": 1,
+                        "speedUp": false,
+                        "teleport": false,
+                        "teleportTime": 0,
+                        "totalHP": 500
+                    },
+                    "blocking": false,
+                    "cost": 5,
+                    "defence": 10,
+                    "hasDropped": false,
+                    "hit_counter": 2,
+                    "hp": 480,
+                    "level": 0,
+                    "levelUP_material": 5,
+                    "name": 1,
+                    "position": {
+                        "direction": 3,
+                        "x": 525,
+                        "y": 225
+                    },
+                    "range": 50,
+                    "teleport": false,
+                    "teleportTime": 0,
+                    "totalHP": 500,
+                    "type": 1
+                }
+            },
+            {
+                "coordinate": {
+                    "direction": 1,
+                    "x": 575,
+                    "y": 425
+                },
+                "tower": {
+                    "affixSlot": [
+                    ],
+                    "alive": true,
+                    "attackInterval": 250,
+                    "attackPower": 100,
+                    "attackTime": 0,
+                    "attack_counter": 0,
+                    "blockList": null,
+                    "blocking": false,
+                    "cost": 5,
+                    "defence": 10,
+                    "hasDropped": false,
+                    "hit_counter": 0,
+                    "hp": 500,
+                    "level": 0,
+                    "levelUP_material": 5,
+                    "name": 1,
+                    "position": {
+                        "direction": 1,
+                        "x": 575,
+                        "y": 425
+                    },
+                    "range": 50,
+                    "teleport": false,
+                    "teleportTime": 0,
+                    "totalHP": 500,
+                    "type": 1
+                }
+            }
+        ]
+    },
+    "enemyManager": {
+        "enemyList": [
+            {
+                "affixSlot": [
+                    {
+                        "isOccupied": true,
+                        "ownerType": "Enemy",
+                        "type": 5
+                    },
+                    {
+                        "isOccupied": true,
+                        "ownerType": "Enemy",
+                        "type": 5
+                    }
+                ],
+                "alive": false,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 132,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": true,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 0,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 3,
+                    "x": 325,
+                    "y": 225
+                },
+                "pathType": 0,
+                "path_index": 10,
+                "position": {
+                    "direction": 3,
+                    "x": 305,
+                    "y": 223
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": false,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 106,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": true,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 0,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 3,
+                    "x": 525,
+                    "y": 225
+                },
+                "pathType": 0,
+                "path_index": 14,
+                "position": {
+                    "direction": 3,
+                    "x": 505,
+                    "y": 223
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": false,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 59,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": true,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 0,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 3,
+                    "x": 325,
+                    "y": 225
+                },
+                "pathType": 0,
+                "path_index": 10,
+                "position": {
+                    "direction": 3,
+                    "x": 305,
+                    "y": 223
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": false,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 56,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": true,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 0,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 3,
+                    "x": 325,
+                    "y": 225
+                },
+                "pathType": 0,
+                "path_index": 10,
+                "position": {
+                    "direction": 3,
+                    "x": 305,
+                    "y": 223
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 18,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": false,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 150,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 3,
+                    "x": 475,
+                    "y": 225
+                },
+                "pathType": 0,
+                "path_index": 13,
+                "position": {
+                    "direction": 3,
+                    "x": 446,
+                    "y": 223
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 18,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": false,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 420,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 3,
+                    "x": 325,
+                    "y": 225
+                },
+                "pathType": 0,
+                "path_index": 10,
+                "position": {
+                    "direction": 3,
+                    "x": 289,
+                    "y": 223
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 0,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": false,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 500,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 1,
+                    "x": 225,
+                    "y": 175
+                },
+                "pathType": 0,
+                "path_index": 7,
+                "position": {
+                    "direction": 1,
+                    "x": 223,
+                    "y": 132
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 20,
+                "attackTime": 0,
+                "attackable": true,
+                "bleeding": false,
+                "bleedingTime": 0,
+                "blocked": false,
+                "defence": 10,
+                "end": {
+                    "direction": 3,
+                    "x": 725,
+                    "y": 475
+                },
+                "hp": 500,
+                "icy": false,
+                "icyTime": 0,
+                "level": 0,
+                "next_position": {
+                    "direction": 3,
+                    "x": 175,
+                    "y": 75
+                },
+                "pathType": 0,
+                "path_index": 4,
+                "position": {
+                    "direction": 3,
+                    "x": 125,
+                    "y": 73
+                },
+                "range": 100,
+                "speed": 1,
+                "speedUp": false,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500
+            }
+        ]
+    },
+    "enemyWave": {
+        "counter": 8,
+        "interval": 5000,
+        "number": 20
+    },
+    "index": 0,
+    "map": {
+        "RTable": [
+            {
+                "direction": 1,
+                "x": 75,
+                "y": 25
+            },
+            {
+                "direction": 1,
+                "x": 125,
+                "y": 25
+            },
+            {
+                "direction": 1,
+                "x": 175,
+                "y": 25
+            },
+            {
+                "direction": 1,
+                "x": 225,
+                "y": 25
+            },
+            {
+                "direction": 1,
+                "x": 275,
+                "y": 25
+            },
+            {
+                "direction": 1,
+                "x": 275,
+                "y": 75
+            },
+            {
+                "direction": 1,
+                "x": 275,
+                "y": 125
+            },
+            {
+                "direction": 1,
+                "x": 275,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 325,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 375,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 425,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 475,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 525,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 575,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 625,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 625,
+                "y": 225
+            },
+            {
+                "direction": 1,
+                "x": 625,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 625,
+                "y": 325
+            },
+            {
+                "direction": 1,
+                "x": 625,
+                "y": 375
+            },
+            {
+                "direction": 1,
+                "x": 625,
+                "y": 425
+            },
+            {
+                "direction": 1,
+                "x": 675,
+                "y": 425
+            },
+            {
+                "direction": 1,
+                "x": 725,
+                "y": 425
+            },
+            {
+                "direction": 1,
+                "x": 25,
+                "y": 125
+            },
+            {
+                "direction": 1,
+                "x": 75,
+                "y": 125
+            },
+            {
+                "direction": 1,
+                "x": 125,
+                "y": 125
+            },
+            {
+                "direction": 1,
+                "x": 175,
+                "y": 125
+            },
+            {
+                "direction": 1,
+                "x": 175,
+                "y": 175
+            },
+            {
+                "direction": 1,
+                "x": 175,
+                "y": 225
+            },
+            {
+                "direction": 1,
+                "x": 175,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 225,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 275,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 325,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 375,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 425,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 475,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 525,
+                "y": 275
+            },
+            {
+                "direction": 1,
+                "x": 525,
+                "y": 325
+            },
+            {
+                "direction": 1,
+                "x": 525,
+                "y": 375
+            },
+            {
+                "direction": 1,
+                "x": 525,
+                "y": 425
+            },
+            {
+                "direction": 1,
+                "x": 525,
+                "y": 475
+            }
+        ],
+        "allPath": [
+            {
+                "path": [
+                    {
+                        "direction": 1,
+                        "x": 25,
+                        "y": 25
+                    },
+                    {
+                        "direction": 3,
+                        "x": 25,
+                        "y": 75
+                    },
+                    {
+                        "direction": 3,
+                        "x": 75,
+                        "y": 75
+                    },
+                    {
+                        "direction": 3,
+                        "x": 125,
+                        "y": 75
+                    },
+                    {
+                        "direction": 3,
+                        "x": 175,
+                        "y": 75
+                    },
+                    {
+                        "direction": 1,
+                        "x": 225,
+                        "y": 75
+                    },
+                    {
+                        "direction": 1,
+                        "x": 225,
+                        "y": 125
+                    },
+                    {
+                        "direction": 1,
+                        "x": 225,
+                        "y": 175
+                    },
+                    {
+                        "direction": 3,
+                        "x": 225,
+                        "y": 225
+                    },
+                    {
+                        "direction": 3,
+                        "x": 275,
+                        "y": 225
+                    },
+                    {
+                        "direction": 3,
+                        "x": 325,
+                        "y": 225
+                    },
+                    {
+                        "direction": 3,
+                        "x": 375,
+                        "y": 225
+                    },
+                    {
+                        "direction": 3,
+                        "x": 425,
+                        "y": 225
+                    },
+                    {
+                        "direction": 3,
+                        "x": 475,
+                        "y": 225
+                    },
+                    {
+                        "direction": 3,
+                        "x": 525,
+                        "y": 225
+                    },
+                    {
+                        "direction": 1,
+                        "x": 575,
+                        "y": 225
+                    },
+                    {
+                        "direction": 1,
+                        "x": 575,
+                        "y": 275
+                    },
+                    {
+                        "direction": 1,
+                        "x": 575,
+                        "y": 325
+                    },
+                    {
+                        "direction": 1,
+                        "x": 575,
+                        "y": 375
+                    },
+                    {
+                        "direction": 1,
+                        "x": 575,
+                        "y": 425
+                    },
+                    {
+                        "direction": 3,
+                        "x": 575,
+                        "y": 475
+                    },
+                    {
+                        "direction": 3,
+                        "x": 625,
+                        "y": 475
+                    },
+                    {
+                        "direction": 3,
+                        "x": 675,
+                        "y": 475
+                    },
+                    {
+                        "direction": 3,
+                        "x": 725,
+                        "y": 475
+                    }
+                ],
+                "type": 0
+            }
+        ],
+        "endPoints": [
+            {
+                "direction": 3,
+                "x": 725,
+                "y": 475
+            }
+        ],
+        "gridSize": 50,
+        "length": 15,
+        "startPoints": [
+            {
+                "direction": 1,
+                "x": 25,
+                "y": 25
+            }
+        ],
+        "width": 10
+    },
+    "towerManager": {
+        "towerList": [
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 200,
+                "attackTime": 212,
+                "attack_counter": 15,
+                "blockList": {
+                    "affixSlot": [
+                    ],
+                    "alive": false,
+                    "attackInterval": 250,
+                    "attackPower": 20,
+                    "attackTime": 56,
+                    "attackable": true,
+                    "bleeding": false,
+                    "bleedingTime": 0,
+                    "blocked": true,
+                    "defence": 10,
+                    "end": {
+                        "direction": 3,
+                        "x": 725,
+                        "y": 475
+                    },
+                    "hp": 0,
+                    "icy": false,
+                    "icyTime": 0,
+                    "level": 0,
+                    "next_position": {
+                        "direction": 3,
+                        "x": 325,
+                        "y": 225
+                    },
+                    "pathType": 0,
+                    "path_index": 10,
+                    "position": {
+                        "direction": 3,
+                        "x": 305,
+                        "y": 223
+                    },
+                    "range": 100,
+                    "speed": 1,
+                    "speedUp": false,
+                    "teleport": false,
+                    "teleportTime": 0,
+                    "totalHP": 500
+                },
+                "blocking": false,
+                "cost": 5,
+                "defence": 10,
+                "hasDropped": true,
+                "hit_counter": 15,
+                "hp": 350,
+                "level": 1,
+                "levelUP_material": 5,
+                "name": 1,
+                "position": {
+                    "direction": 3,
+                    "x": 325,
+                    "y": 225
+                },
+                "range": 50,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500,
+                "type": 1
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 100,
+                "attackTime": 0,
+                "attack_counter": 0,
+                "blockList": null,
+                "blocking": false,
+                "cost": 5,
+                "defence": 10,
+                "hasDropped": false,
+                "hit_counter": 0,
+                "hp": 500,
+                "level": 0,
+                "levelUP_material": 5,
+                "name": 1,
+                "position": {
+                    "direction": 1,
+                    "x": 575,
+                    "y": 425
+                },
+                "range": 50,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500,
+                "type": 1
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 100,
+                "attackTime": 0,
+                "attack_counter": 2,
+                "blockList": {
+                    "affixSlot": [
+                    ],
+                    "alive": false,
+                    "attackInterval": 250,
+                    "attackPower": 20,
+                    "attackTime": 106,
+                    "attackable": true,
+                    "bleeding": false,
+                    "bleedingTime": 0,
+                    "blocked": true,
+                    "defence": 10,
+                    "end": {
+                        "direction": 3,
+                        "x": 725,
+                        "y": 475
+                    },
+                    "hp": 0,
+                    "icy": false,
+                    "icyTime": 0,
+                    "level": 0,
+                    "next_position": {
+                        "direction": 3,
+                        "x": 525,
+                        "y": 225
+                    },
+                    "pathType": 0,
+                    "path_index": 14,
+                    "position": {
+                        "direction": 3,
+                        "x": 505,
+                        "y": 223
+                    },
+                    "range": 100,
+                    "speed": 1,
+                    "speedUp": false,
+                    "teleport": false,
+                    "teleportTime": 0,
+                    "totalHP": 500
+                },
+                "blocking": false,
+                "cost": 5,
+                "defence": 10,
+                "hasDropped": false,
+                "hit_counter": 2,
+                "hp": 480,
+                "level": 0,
+                "levelUP_material": 5,
+                "name": 1,
+                "position": {
+                    "direction": 3,
+                    "x": 525,
+                    "y": 225
+                },
+                "range": 50,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500,
+                "type": 1
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 50,
+                "attackTime": 94,
+                "attack_counter": 11,
+                "blockList": null,
+                "blocking": false,
+                "cost": 5,
+                "defence": 10,
+                "hasDropped": true,
+                "hit_counter": 11,
+                "hp": 490,
+                "level": 0,
+                "levelUP_material": 5,
+                "name": 0,
+                "position": {
+                    "direction": 1,
+                    "x": 175,
+                    "y": 225
+                },
+                "range": 100,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500,
+                "type": 0
+            },
+            {
+                "affixSlot": [
+                ],
+                "alive": true,
+                "attackInterval": 250,
+                "attackPower": 50,
+                "attackTime": 162,
+                "attack_counter": 0,
+                "blockList": null,
+                "blocking": false,
+                "cost": 5,
+                "defence": 10,
+                "hasDropped": false,
+                "hit_counter": 0,
+                "hp": 500,
+                "level": 0,
+                "levelUP_material": 5,
+                "name": 0,
+                "position": {
+                    "direction": 1,
+                    "x": 425,
+                    "y": 275
+                },
+                "range": 100,
+                "teleport": false,
+                "teleportTime": 0,
+                "totalHP": 500,
+                "type": 0
+            }
+        ]
+    }
+}
